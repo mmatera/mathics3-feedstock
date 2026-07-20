@@ -11,11 +11,12 @@ source:
   sha256: fbf153b110245fbfa4e7f4098f13c86e8d616f986b805ede80d3051b400ddd94
 
 build:
-  number: 0
+  noarch: python  # [linux]
+  noarch: python  # [osx]
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - mathics = mathics.__main__:main
-
 requirements:
   build:
     - {{ compiler('c') }}
@@ -23,7 +24,7 @@ requirements:
   host:
     - cython
     - pip
-    - python
+    - python {{ python_min }}
     - setuptools >=70.0.0
   run:
     - Mathics3-Scanner >=10.0.1
@@ -32,7 +33,7 @@ requirements:
     - palettable    
     - pillow >=9.2
     - pint
-    - python
+    - python >={{ python_min }}
     - python-dateutil
     - python-magic
     - Pympler
